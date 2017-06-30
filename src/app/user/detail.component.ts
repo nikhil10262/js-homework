@@ -4,6 +4,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { User } from '../user';
 import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../user.service';
+import { ValidationService } from './validation.service';
+
 
 import 'rxjs/add/operator/switchMap';
 
@@ -22,13 +24,13 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = new FormGroup({
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, ValidationService.emailValidator, ]),
       first_name: new FormControl(null, Validators.required),
       last_name: new FormControl(null, Validators.required)
     });
 
     if (this.route.snapshot.params['id']) {
-      let id = +this.route.snapshot.params['id'];
+      const id = +this.route.snapshot.params['id'];
       this.user = this.userService.getUser(id);
     } else {
       this.user = this.userService.getUser(null);
@@ -37,7 +39,7 @@ export class UserDetailComponent implements OnInit {
 
   createUser(model: User, isValid: Boolean) {
     if (isValid) {
-      console.log(String(Object.keys(this.userService.getUsers()).length + 1))
+      console.log(String(Object.keys(this.userService.getUsers()).length + 1));
       this.user.buyer_id = String(Object.keys(this.userService.getUsers()).length + 1);
       this.user.id = String(Object.keys(this.userService.getUsers()).length + 1);
       this.user.email = model.email;

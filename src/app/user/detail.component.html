@@ -6,20 +6,26 @@
   <md-card-content>
     <form [formGroup]="userInfo" (ngSubmit)="createUser(userInfo.value, userInfo.valid)"  class="user_edit_form">
       <md-input-container class="full-width">
-        <input mdInput type="email" placeholder="Email Address" formControlName="email" value="{{user.email}}" name="email"/>
+        <input mdInput required type="email" placeholder="Email Address" formControlName="email" value="{{user.email}}" name="email"/>
       </md-input-container>
-      <table class="full-width" cellspacing="0">
-      
+      <app-validation-messages [control]="userInfo.controls.email"></app-validation-messages>
+      <table class="full-width"  cellspacing="0">
+
         <tr>
           <td>
             <md-input-container class="full-width">
-              <input mdInput placeholder="First name" formControlName="first_name"  value="{{user.first_name}}">
+              <input mdInput placeholder="First name" formControlName="first_name"  value="{{user.first_name}}"/>
             </md-input-container>
+            <app-validation-messages [control]="userInfo.controls.first_name"></app-validation-messages>
+
           </td>
+
           <td>
             <md-input-container class="full-width">
-              <input mdInput placeholder="Last Name"  formControlName="last_name" value="{{user.last_name}}">
+              <input mdInput placeholder="Last Name"  formControlName="last_name" value="{{user.last_name}}"/>
             </md-input-container>
+            <app-validation-messages [control]="userInfo.controls.last_name"></app-validation-messages>
+
           </td>
         </tr>
       </table>
@@ -28,4 +34,4 @@
 
   </md-card-content>
 </md-card>
- 
+

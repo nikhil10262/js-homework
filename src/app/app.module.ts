@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-
+import { ValidationMessagesComponent } from './user/validation-messages.component';
+import { ValidationService } from './user/validation.service';
 
 // Material Design
 import { MdCardModule, MdGridListModule, MdIconModule, MdToolbarModule, MdButtonModule } from '@angular/material';
@@ -24,7 +25,8 @@ import { UserDetailComponent } from './user/detail.component';
     DashboardComponent,
     UserInfoComponent,
     LogoutComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    ValidationMessagesComponent
   ],
   imports: [
     AppRoutingModule,
@@ -40,7 +42,7 @@ import { UserDetailComponent } from './user/detail.component';
     MdToolbarModule,
     NoopAnimationsModule
   ],
-  providers: [],
+  providers: [ValidationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
